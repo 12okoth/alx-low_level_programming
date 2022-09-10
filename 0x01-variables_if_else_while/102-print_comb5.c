@@ -1,7 +1,7 @@
 #include <stdio.h>
 /**
  * main - Entry point
- * Retun: 0
+ * Return: 0
  **/
 int main(void)
 {
@@ -27,4 +27,3 @@ int main(void)
 	putchar('\n');
 	return (0);
 }
-
