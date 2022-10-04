@@ -1,46 +1,42 @@
 #include "main.h"
-#include <stdlib.h>
 
 /**
- * argstostr - Concatenates all arguments of the program into a string;
- * arguments are separated by a new line in the string.
- * @ac: The number of arguments passed to the program.
- * @av: An array of pointers to the arguments.
+ * argstostr - concatenate all arguments given
+ * @ac: number of arguments
+ * @av: char pointer
  *
- * Return: If ac == 0, av == NULL, or the function fails - NULL.
- * Otherwise - a pointer to the new string.
+ * Return: SUCCESS ? pointer to string : NULL
  */
 
 char *argstostr(int ac, char **av)
 {
-	char *str;
-	int arg, byte, index, size = ac;
+	char *s;
+	int len, i, j, k = 0;
 
-	if (ac == 0 || av == NULL)
+	if (!av)
 		return (NULL);
 
-	for (arg = 0; arg < ac; arg++)
+	len = 0;
+	for (i = 0; i < ac; i++)
+		len += strlen(av[i]);
+
+	len += (ac + 1);
+
+	s = malloc(len * sizeof(char));
+
+	if (!s)
 	{
-		for (byte = 0; av[arg][byte]; byte++)
-			size++;
-	}
-
-	str = malloc(sizeof(char) * size + 1);
-
-	if (str == NULL)
+		free(s);
 		return (NULL);
-
-	index = 0;
-
-	for (arg = 0; arg < ac; arg++)
-	{
-		for (byte = 0; av[arg][byte]; byte++)
-			str[index++] = av[arg][byte];
-
-		str[index++] = '\n';
-	
-
-		str[size] = '\0';
-
-		return (str);
 	}
+
+	for (i = 0; i < ac; i++)
+	{
+		for (j = 0; j < (int) strlen(av[i]); j++)
+			s[k++] = av[i][j];
+
+		s[k++] = '\n';
+	}
+
+	return (s);
+}
